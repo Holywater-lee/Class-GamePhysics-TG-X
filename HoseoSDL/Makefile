@@ -17,7 +17,7 @@ SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 CPPFLAGS := -Iinclude -MMD -MP -I$(INC_DIR) -I$(SDL_INC)
-CFLAGS   := -Wall 
+CFLAGS   := -Wall
 LDFLAGS  := -Llib
 LDLIBS   := -lm
 

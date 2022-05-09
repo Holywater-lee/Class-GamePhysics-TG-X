@@ -2,8 +2,8 @@
 #include "Game.h"
 #include "Target.h"
 
-const int WIDTH = 800;
-const int HEIGHT = 600;
+const int WIDTH = 600;
+const int HEIGHT = 400;
 
 Walker::Walker(float x, float y) : location(x, y), velocity(0, 0), acceleration(0, 0), r(16), maxForce(0.25)
 {

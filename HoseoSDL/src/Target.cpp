@@ -1,8 +1,8 @@
 #include "Target.h"
 #include <MyRandom.h>
 
-const int WIDTH = 800;
-const int HEIGHT = 600;
+const int WIDTH = 600;
+const int HEIGHT = 400;
 
 Target::Target(float x, float y) : Walker(x, y)
 {
