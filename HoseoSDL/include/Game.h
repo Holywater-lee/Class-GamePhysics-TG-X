@@ -41,7 +41,8 @@ private:
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 
-	Walker* _walker;
+	int numWalkers;
+	std::vector<Walker*> _walkers;
 	Target* _target;
 };
 

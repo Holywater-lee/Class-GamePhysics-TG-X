@@ -1,8 +1,9 @@
 #include "Walker.h"
 #include "Game.h"
+#include "Target.h"
 
-const int WIDTH = 600;
-const int HEIGHT = 400;
+const int WIDTH = 800;
+const int HEIGHT = 600;
 
 Walker::Walker(float x, float y) : location(x, y), velocity(0, 0), acceleration(0, 0), r(16), maxForce(0.25)
 {
@@ -31,15 +32,21 @@ Vector2D Walker::seek(Vector2D target, bool flee)
 	return desiredForce;
 }
 
-Vector2D Walker::pursue(Vector2D target, bool evade)
+Vector2D Walker::pursue(Walker* target, bool evade)
 {
-	Vector2D prediction = velocity;
-	float dist = Vector2D(target - location).length();
+	Vector2D prediction = target->getVelocity();
 
-	prediction *= 200;
-	//prediction = prediction.Normalized() * dist / 10 * (evade ? -1 : 1);
+	float dist = Vector2D(target->getLocation() - location).length();
 
-	return seek(target + prediction);
+	prediction = prediction * dist / 30;
+	dynamic_cast<Target*>(target)->predictionLength = prediction.length();
+	//Vector2D predictionVertex = prediction + target->getLocation();
+
+	//lineRGBA(Game::Instance()->getRenderer(), predictionVertex.getX(), predictionVertex.getY(), target->getLocation().getX(), target->getLocation().getY(), 255, 255, 255, 255);
+	//filledCircleRGBA(Game::Instance()->getRenderer(), predictionVertex.getX(), predictionVertex.getY(), r, 155, 155, 255, 100);
+	//aacircleRGBA(Game::Instance()->getRenderer(), predictionVertex.getX(), predictionVertex.getY(), r, 155, 155, 255, 255);
+
+	return seek(target->getLocation() + prediction) * (evade ? -1 : 1);
 }
 
 void Walker::applyForce(Vector2D force)
