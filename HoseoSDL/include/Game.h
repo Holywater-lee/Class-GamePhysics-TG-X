@@ -43,7 +43,7 @@ private:
 
 	int numWalkers;
 	std::vector<Walker*> _walkers;
-	Target* _target;
+	//Target* _target;
 };
 
 typedef Game TheGame;

@@ -16,14 +16,12 @@ bool Game::setup()
 
 	result = init("Nature of Code", 100, 100, WIDTH, HEIGHT, false);
 	
-	numWalkers = 2;
+	numWalkers = 1;
 	_walkers.reserve(numWalkers);
 	for (int i = 0; i < numWalkers; i++)
 	{
 		_walkers.push_back(new Walker(50 + 10 * i, 50 + 10 * i));
 	}
-	
-	_target = new Target(WIDTH - 50, HEIGHT - 50);
 
 	return result;
 }
@@ -32,21 +30,12 @@ void Game::update()
 {
 	for (const auto& w : _walkers)
 	{
-		w->applyForce(w->pursue(_target));
-
-		float dist = Vector2D(w->getLocation() - _target->getLocation()).length();
-		if (dist < w->getR() + _target->getR())
-		{
-			_target->init(Vector2D(MyRandom::GetRandomFloat(WIDTH), MyRandom::GetRandomFloat(HEIGHT)));
-			w->refreshLocation(Vector2D(WIDTH / 2, HEIGHT / 2));
-		}
-
+		//w->applyForce(w->pursue(_target));
+		w->Wander();
+		w->applyForce(Vector2D(1, 0));
 		w->update();
 		w->edges();
 	}
-	
-	_target->update();
-	_target->edges();
 }
 
 void Game::render()
@@ -59,7 +48,7 @@ void Game::render()
 		w->draw(m_pRenderer);
 	}
 
-	_target->draw(m_pRenderer);
+	//_target->draw(m_pRenderer);
 
 	SDL_RenderPresent(m_pRenderer);
 }
@@ -72,7 +61,7 @@ void Game::clean()
 	}
 	_walkers.clear();
 
-	delete _target;
+	//delete _target;
 
 	TheInputHandler::Instance()->clean();
 
