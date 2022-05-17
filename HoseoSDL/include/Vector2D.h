@@ -97,6 +97,11 @@ public:
 		return Vector2D((*this).m_x * cos(radian) - (*this).m_y * sin(radian) + tx, (*this).m_x * sin(radian) + (*this).m_y * cos(radian) + ty);
 	}
 
+	Vector2D RotTranslate(float radian, Vector2D transform)
+	{
+		return Vector2D((*this).m_x * cos(radian) - (*this).m_y * sin(radian) + transform.m_x, (*this).m_x * sin(radian) + (*this).m_y * cos(radian) + transform.m_y);
+	}
+
 	float constrainSquare(float min, float max) const
 	{
 		float distSquare = m_x * m_x + m_y * m_y;
