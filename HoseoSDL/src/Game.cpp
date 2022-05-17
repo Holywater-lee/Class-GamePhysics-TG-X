@@ -30,9 +30,7 @@ void Game::update()
 {
 	for (const auto& w : _walkers)
 	{
-		//w->applyForce(w->pursue(_target));
 		w->Wander();
-		w->applyForce(Vector2D(1, 0));
 		w->update();
 		w->edges();
 	}
