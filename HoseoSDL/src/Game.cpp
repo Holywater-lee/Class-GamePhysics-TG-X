@@ -5,6 +5,8 @@ const int HEIGHT = 400;
 #include "InputHandler.h"
 
 #include "Walker.h"
+#include "HidingAgent.h"
+#include "Obstacle.h"
 #include "MyRandom.h"
 
 Game* Game::s_pInstance = 0;
@@ -14,13 +16,23 @@ bool Game::setup()
 	bool result;
 
 	result = init("Nature of Code", 100, 100, WIDTH, HEIGHT, false);
-	
-	numWalkers = 1;
-	_walkers.reserve(numWalkers);
-	for (int i = 0; i < numWalkers; i++)
+
+	numObstacles = 5;
+	obstacles.reserve(numObstacles);
+	for (int i = 0; i < numObstacles; i++)
 	{
-		_walkers.push_back(new Walker(50 + 10 * i, 50 + 10 * i));
+		// Ãß°¡ ¿ä¸Á
+		//obstacles.push_back(new Obstacle(50 + 10 * i, 50 + 10 * i));
 	}
+	
+	numHidingAgents = 3;
+	hiders.reserve(numHidingAgents);
+	for (int i = 0; i < numHidingAgents; i++)
+	{
+		hiders.push_back(new HidingAgent(50 + 10 * i, 50 + 10 * i));
+	}
+
+	hunter = new Walker(WIDTH / 2, HEIGHT / 2);
 
 	return result;
 }
@@ -28,12 +40,16 @@ bool Game::setup()
 void Game::update()
 {
 	mousePos = *InputHandler::Instance()->getMousePosition();
-	for (const auto& w : _walkers)
+	for (const auto& h : hiders)
 	{
-		w->applyForce(w->Arrive(mousePos));
-		w->update();
-		w->edges();
+		//h->applyForce(h->Hide(hunter, ));
+		h->update();
+		h->edges();
 	}
+
+	hunter->applyForce(hunter->Arrive(mousePos));
+	hunter->update();
+	hunter->edges();
 }
 
 void Game::render()
@@ -43,9 +59,9 @@ void Game::render()
 	
 	filledCircleRGBA(m_pRenderer, mousePos.getX(), mousePos.getY(), 16, 255, 0, 0, 255);
 
-	for (const auto& w : _walkers)
+	for (const auto& h : hiders)
 	{
-		w->draw(m_pRenderer);
+		h->draw(m_pRenderer);
 	}
 
 	SDL_RenderPresent(m_pRenderer);
@@ -53,13 +69,11 @@ void Game::render()
 
 void Game::clean()
 {
-	for (int i = 0; i != _walkers.size(); i++)
+	for (int i = 0; i != hiders.size(); i++)
 	{
-		delete _walkers[i];
+		delete hiders[i];
 	}
-	_walkers.clear();
-
-	//delete _target;
+	hiders.clear();
 
 	TheInputHandler::Instance()->clean();
 

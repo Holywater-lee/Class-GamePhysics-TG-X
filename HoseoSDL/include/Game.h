@@ -7,6 +7,8 @@
 #include <vector>
 
 class Walker;
+class Obstacle;
+class HidingAgent;
 
 class Game {
 private:
@@ -40,8 +42,13 @@ private:
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 
-	int numWalkers;
-	std::vector<Walker*> _walkers;
+	int numHidingAgents;
+	std::vector<HidingAgent*> hiders;
+	Walker* hunter;
+
+	int numObstacles;
+	std::vector<Obstacle*> obstacles;
+
 	Vector2D mousePos;
 };
 

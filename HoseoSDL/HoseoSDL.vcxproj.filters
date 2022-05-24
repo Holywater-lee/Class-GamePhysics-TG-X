@@ -30,6 +30,12 @@
     <ClInclude Include="include\MyRandom.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="include\HidingAgent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Obstacle.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -42,6 +48,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\Walker.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HidingAgent.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -24,6 +24,7 @@ public:
 	}
 
 	float length() { return sqrt(m_x * m_x + m_y * m_y); }
+	float lengthSqaured() { return m_x * m_x + m_y * m_y; }
 
 	Vector2D operator+(const Vector2D& v2) const
 	{

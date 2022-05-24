@@ -26,7 +26,7 @@ void Walker::update()
 	heading = atan2(velocity.getY(), velocity.getX());
 }
 
-Vector2D Walker::seek(Vector2D target, bool flee)
+Vector2D Walker::seek(const Vector2D& target, bool flee)
 {
 	Vector2D desiredForce = target - location;
 
@@ -73,7 +73,7 @@ void Walker::Wander()
 	applyForce(steer);
 }
 
-Vector2D Walker::Arrive(Vector2D target)
+Vector2D Walker::Arrive(const Vector2D& target)
 {
 	Vector2D Direction = target - location;
 	float Distance = Direction.length();
@@ -92,7 +92,7 @@ Vector2D Walker::Arrive(Vector2D target)
 	return Vector2D(0, 0);
 }
 
-void Walker::applyForce(Vector2D force)
+void Walker::applyForce(const Vector2D& force)
 {
 	acceleration += force;
 }

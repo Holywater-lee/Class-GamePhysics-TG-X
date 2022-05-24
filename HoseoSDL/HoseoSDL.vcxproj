@@ -20,12 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\HidingAgent.h" />
     <ClInclude Include="include\InputHandler.h" />
     <ClInclude Include="include\MyRandom.h" />
+    <ClInclude Include="include\Obstacle.h" />
     <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="include\Walker.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\HidingAgent.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\main.cpp" />

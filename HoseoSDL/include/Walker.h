@@ -10,15 +10,16 @@ class Walker
 {
 public:
 	Walker(float x, float y);
+	virtual ~Walker() {}
 	virtual void draw(SDL_Renderer* renderer);
 	void update();
-	void applyForce(Vector2D force);
-	Vector2D seek(Vector2D target, bool flee = false);
+	void applyForce(const Vector2D& force);
+	Vector2D seek(const Vector2D& target, bool flee = false);
 	Vector2D pursue(Walker* target, bool evade = false);
 	void Wander();
-	Vector2D Arrive(Vector2D target);
+	Vector2D Arrive(const Vector2D& target);
 	virtual void edges();
-	void refreshLocation(Vector2D pos) { location = pos; }
+	void refreshLocation(const Vector2D& pos) { location = pos; }
 
 	Vector2D getLocation() const { return location; }
 	Vector2D getVelocity() const { return velocity; }
