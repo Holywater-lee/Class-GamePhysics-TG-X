@@ -9,6 +9,8 @@ public:
 	HidingAgent(float x, float y);
 	~HidingAgent() {}
 
+	void draw(SDL_Renderer* renderer) override;
+
 	Vector2D Hide(Walker* hunter, const std::vector<Obstacle*>& obstacles);
 
 private:

@@ -21,15 +21,18 @@ bool Game::setup()
 	obstacles.reserve(numObstacles);
 	for (int i = 0; i < numObstacles; i++)
 	{
-		// Ãß°¡ ¿ä¸Á
-		//obstacles.push_back(new Obstacle(50 + 10 * i, 50 + 10 * i));
+		obstacles.push_back(new Obstacle(
+							MyRandom::GetRandomFloat(50, WIDTH - 50),
+							MyRandom::GetRandomFloat(50, HEIGHT - 50),
+							MyRandom::GetRandomFloat(20, 30)));
 	}
 	
-	numHidingAgents = 3;
+	numHidingAgents = 4;
 	hiders.reserve(numHidingAgents);
 	for (int i = 0; i < numHidingAgents; i++)
 	{
-		hiders.push_back(new HidingAgent(50 + 10 * i, 50 + 10 * i));
+		hiders.push_back(new HidingAgent(MyRandom::GetRandomFloat(50, WIDTH - 50),
+			MyRandom::GetRandomFloat(50, HEIGHT - 50)));
 	}
 
 	hunter = new Walker(WIDTH / 2, HEIGHT / 2);
@@ -42,7 +45,7 @@ void Game::update()
 	mousePos = *InputHandler::Instance()->getMousePosition();
 	for (const auto& h : hiders)
 	{
-		//h->applyForce(h->Hide(hunter, ));
+		h->applyForce(h->Hide(hunter, obstacles));
 		h->update();
 		h->edges();
 	}
@@ -59,10 +62,17 @@ void Game::render()
 	
 	filledCircleRGBA(m_pRenderer, mousePos.getX(), mousePos.getY(), 16, 255, 0, 0, 255);
 
+	for (const auto& o : obstacles)
+	{
+		o->draw(m_pRenderer);
+	}
+
 	for (const auto& h : hiders)
 	{
 		h->draw(m_pRenderer);
 	}
+
+	hunter->draw(m_pRenderer);
 
 	SDL_RenderPresent(m_pRenderer);
 }
@@ -74,6 +84,8 @@ void Game::clean()
 		delete hiders[i];
 	}
 	hiders.clear();
+
+	delete hunter;
 
 	TheInputHandler::Instance()->clean();
 
