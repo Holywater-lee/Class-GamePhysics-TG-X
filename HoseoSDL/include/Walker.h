@@ -16,6 +16,7 @@ public:
 	Vector2D seek(Vector2D target, bool flee = false);
 	Vector2D pursue(Walker* target, bool evade = false);
 	void Wander();
+	Vector2D Arrive(Vector2D target);
 	virtual void edges();
 	void refreshLocation(Vector2D pos) { location = pos; }
 
@@ -32,11 +33,12 @@ protected:
 	float maxSpeed;
 	float heading = 0;
 
+	float arriveDeceleration = 2;
+
 	float theta = 3.1415926535 * 2 * MyRandom::GetRandomFloat(0, 1);
-	//Vector2D m_vWanderTarget;
+
 	Vector2D m_finalTarget;
 	Vector2D m_vWanderPoint;
 	float m_fWanderRadius = 40;
 	float m_fWanderDistance = 100;
-	std::vector<Vector2D> paths;
 };

@@ -1,9 +1,15 @@
 #include "Walker.h"
 #include "Game.h"
-#include "Target.h"
+//#include "Target.h"
 
 const int WIDTH = 600;
 const int HEIGHT = 400;
+
+inline float Clamp(float src, float min, float max)
+{
+	src = src > max ? max : src;
+	return src < min ? min : src;
+}
 
 Walker::Walker(float x, float y) : location(x, y), velocity(0, 1), acceleration(0, 0), r(16), maxForce(0.2), m_vWanderPoint(0, 0), m_finalTarget(0, 0)
 {
@@ -39,7 +45,7 @@ Vector2D Walker::pursue(Walker* target, bool evade)
 	float dist = Vector2D(target->getLocation() - location).length();
 
 	prediction = prediction * dist / 30;
-	dynamic_cast<Target*>(target)->predictionLength = prediction.length();
+	//dynamic_cast<Target*>(target)->predictionLength = prediction.length();
 
 	return seek(target->getLocation() + prediction) * (evade ? -1 : 1);
 }
@@ -67,6 +73,25 @@ void Walker::Wander()
 	applyForce(steer);
 }
 
+Vector2D Walker::Arrive(Vector2D target)
+{
+	Vector2D Direction = target - location;
+	float Distance = Direction.length();
+
+	if (Distance > 0)
+	{
+		float speed = Distance / arriveDeceleration;
+
+		speed = Clamp(speed, speed, maxSpeed);
+
+		Vector2D DesiredVector = Direction / Distance * speed;
+
+		return DesiredVector - velocity;
+	}
+
+	return Vector2D(0, 0);
+}
+
 void Walker::applyForce(Vector2D force)
 {
 	acceleration += force;
@@ -90,12 +115,14 @@ void Walker::draw(SDL_Renderer* renderer)
 	filledTrigonRGBA(renderer, vertex0.getX(), vertex0.getY(), vertex1.getX(), vertex1.getY(), vertex2.getX(), vertex2.getY(), 125, 125, 125, 255);
 	aatrigonRGBA(renderer, vertex0.getX(), vertex0.getY(), vertex1.getX(), vertex1.getY(), vertex2.getX(), vertex2.getY(), 255, 255, 255, 255);
 
+	/*
 	lineRGBA(renderer, m_vWanderPoint.getX(), m_vWanderPoint.getY(), location.getX(), location.getY(), 255, 255, 255, 255);
 	lineRGBA(renderer, m_finalTarget.getX(), m_finalTarget.getY(), location.getX(), location.getY(), 255, 255, 255, 255);
 	aacircleRGBA(renderer, m_vWanderPoint.getX(), m_vWanderPoint.getY(), m_fWanderRadius, 255, 255, 255, 255);
-	
+
 	filledCircleRGBA(renderer, m_vWanderPoint.getX(), m_vWanderPoint.getY(), 4, 255, 0, 0, 255);
 
 	filledCircleRGBA(renderer, m_finalTarget.getX(), m_finalTarget.getY(), 12, 100, 255, 100, 200);
 	aacircleRGBA(renderer, m_finalTarget.getX(), m_finalTarget.getY(), 12, 100, 255, 100, 255);
+	*/
 }

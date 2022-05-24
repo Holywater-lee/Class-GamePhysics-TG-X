@@ -27,9 +27,6 @@
     <ClInclude Include="include\Walker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="include\Target.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="include\MyRandom.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -45,9 +42,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\Walker.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Target.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
