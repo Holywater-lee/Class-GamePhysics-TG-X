@@ -4,7 +4,6 @@ const int HEIGHT = 400;
 #include "Game.h"
 #include "InputHandler.h"
 
-#include "Target.h"
 #include "Walker.h"
 #include "MyRandom.h"
 
@@ -28,9 +27,10 @@ bool Game::setup()
 
 void Game::update()
 {
+	mousePos = *InputHandler::Instance()->getMousePosition();
 	for (const auto& w : _walkers)
 	{
-		w->Wander();
+		w->applyForce(w->Arrive(mousePos));
 		w->update();
 		w->edges();
 	}
@@ -41,12 +41,12 @@ void Game::render()
 	SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_pRenderer);
 	
+	filledCircleRGBA(m_pRenderer, mousePos.getX(), mousePos.getY(), 16, 255, 0, 0, 255);
+
 	for (const auto& w : _walkers)
 	{
 		w->draw(m_pRenderer);
 	}
-
-	//_target->draw(m_pRenderer);
 
 	SDL_RenderPresent(m_pRenderer);
 }

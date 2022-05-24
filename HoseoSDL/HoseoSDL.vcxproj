@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\InputHandler.h" />
-    <ClInclude Include="include\Target.h" />
     <ClInclude Include="include\MyRandom.h" />
     <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="include\Walker.h" />
@@ -30,7 +29,6 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Target.cpp" />
     <ClCompile Include="src\Walker.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -38,7 +36,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{6aa7b4a4-3497-468d-9c43-0a6541c6d785}</ProjectGuid>
     <RootNamespace>HoseoSDL</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

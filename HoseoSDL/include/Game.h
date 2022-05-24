@@ -7,11 +7,10 @@
 #include <vector>
 
 class Walker;
-class Target;
 
 class Game {
 private:
-	Game() {}
+	Game() : mousePos(0, 0) {}
 	static Game* s_pInstance;
 public:
 	static Game* Instance() {
@@ -43,7 +42,7 @@ private:
 
 	int numWalkers;
 	std::vector<Walker*> _walkers;
-	//Target* _target;
+	Vector2D mousePos;
 };
 
 typedef Game TheGame;
