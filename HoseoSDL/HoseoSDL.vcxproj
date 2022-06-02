@@ -19,27 +19,68 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AnimatedTexture.h" />
+    <ClInclude Include="include\AssetManager.h" />
+    <ClInclude Include="include\AudioManager.h" />
+    <ClInclude Include="include\BackgroundStars.h" />
+    <ClInclude Include="include\BezierPath.h" />
+    <ClInclude Include="include\Bullet.h" />
+    <ClInclude Include="include\Enemy.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GameEntity.h" />
+    <ClInclude Include="include\GameManager.h" />
+    <ClInclude Include="include\Graphics.h" />
     <ClInclude Include="include\HidingAgent.h" />
     <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="include\InputManager.h" />
+    <ClInclude Include="include\Level.h" />
+    <ClInclude Include="include\MathHelper.h" />
     <ClInclude Include="include\MyRandom.h" />
     <ClInclude Include="include\Obstacle.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\PlayScreen.h" />
+    <ClInclude Include="include\PlaySideBar.h" />
+    <ClInclude Include="include\ScoreBoard.h" />
+    <ClInclude Include="include\ScreenManager.h" />
+    <ClInclude Include="include\Star.h" />
+    <ClInclude Include="include\StarLayer.h" />
+    <ClInclude Include="include\StartScreen.h" />
+    <ClInclude Include="include\Texture.h" />
+    <ClInclude Include="include\Timer.h" />
     <ClInclude Include="include\Vector2D.h" />
     <ClInclude Include="include\Walker.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\HidingAgent.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\InputHandler.cpp" />
+    <ClCompile Include="src\AnimatedTexture.cpp" />
+    <ClCompile Include="src\AssetManager.cpp" />
+    <ClCompile Include="src\AudioManager.cpp" />
+    <ClCompile Include="src\BackgroundStars.cpp" />
+    <ClCompile Include="src\BezierPath.cpp" />
+    <ClCompile Include="src\Bullet.cpp" />
+    <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\GameEntity.cpp" />
+    <ClCompile Include="src\GameManager.cpp" />
+    <ClCompile Include="src\Graphics.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Walker.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\PlayScreen.cpp" />
+    <ClCompile Include="src\PlaySideBar.cpp" />
+    <ClCompile Include="src\ScoreBoard.cpp" />
+    <ClCompile Include="src\ScreenManager.cpp" />
+    <ClCompile Include="src\Star.cpp" />
+    <ClCompile Include="src\StarLayer.cpp" />
+    <ClCompile Include="src\StartScreen.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{6aa7b4a4-3497-468d-9c43-0a6541c6d785}</ProjectGuid>
     <RootNamespace>HoseoSDL</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
