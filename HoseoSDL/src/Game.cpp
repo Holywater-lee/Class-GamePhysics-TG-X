@@ -17,7 +17,7 @@ bool Game::setup()
 
 	result = init("Nature of Code", 100, 100, WIDTH, HEIGHT, false);
 
-	numObstacles = 5;
+	numObstacles = 15;
 	obstacles.reserve(numObstacles);
 	for (int i = 0; i < numObstacles; i++)
 	{
@@ -27,7 +27,7 @@ bool Game::setup()
 							MyRandom::GetRandomFloat(20, 30)));
 	}
 	
-	numHidingAgents = 4;
+	numHidingAgents = 5;
 	hiders.reserve(numHidingAgents);
 	for (int i = 0; i < numHidingAgents; i++)
 	{
@@ -50,7 +50,7 @@ void Game::update()
 		h->edges();
 	}
 
-	hunter->applyForce(hunter->Arrive(mousePos));
+	hunter->applyForce(hunter->ObstacleAvoidance(obstacles));
 	hunter->update();
 	hunter->edges();
 }
@@ -60,7 +60,29 @@ void Game::render()
 	SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_pRenderer);
 	
-	filledCircleRGBA(m_pRenderer, mousePos.getX(), mousePos.getY(), 16, 255, 0, 0, 255);
+	//filledCircleRGBA(m_pRenderer, mousePos.getX(), mousePos.getY(), 16, 255, 0, 0, 255);
+
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 디버그 시작 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	lineRGBA(m_pRenderer, 0, 200, 600, 200, 255, 255, 255, 100);
+	lineRGBA(m_pRenderer, 300, 0, 300, 400, 255, 255, 255, 100);
+
+	while (!circlesToDraw.empty())
+	{
+		CircleToDraw popedCircle = circlesToDraw.front();
+		circlesToDraw.pop();
+		filledCircleRGBA(m_pRenderer, popedCircle.pos.getX(), popedCircle.pos.getY(), popedCircle.radius, popedCircle.isRed ? 255 : 100, popedCircle.isRed ? 0 : 255, popedCircle.isRed ? 0 : 100, 100);
+		aacircleRGBA(m_pRenderer, popedCircle.pos.getX(), popedCircle.pos.getY(), popedCircle.radius, popedCircle.isRed ? 255 : 100, popedCircle.isRed ? 0 : 255, popedCircle.isRed ? 0 : 100, 255);
+	}
+
+	Vector2D vertex0 = Vector2D(hunter->getR(), 0) + Vector2D(300, 200);
+	Vector2D vertex1 = Vector2D(-hunter->getR(), -hunter->getR() / 2) + Vector2D(300, 200);
+	Vector2D vertex2 = Vector2D(-hunter->getR(), hunter->getR() / 2) + Vector2D(300, 200);
+
+	filledTrigonRGBA(m_pRenderer, vertex0.getX(), vertex0.getY(), vertex1.getX(), vertex1.getY(), vertex2.getX(), vertex2.getY(), 255, 100, 100, 100);
+	aatrigonRGBA(m_pRenderer, vertex0.getX(), vertex0.getY(), vertex1.getX(), vertex1.getY(), vertex2.getX(), vertex2.getY(), 255, 100, 100, 255);
+
+	aacircleRGBA(m_pRenderer, 300, 200, hunter->debugGetDBoxLength(), 255, 255, 100, 255);
+	// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 디버그 끝 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
 	for (const auto& o : obstacles)
 	{

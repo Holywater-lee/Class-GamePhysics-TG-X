@@ -6,6 +6,8 @@
 #include "Vector2D.h"
 #include "MyRandom.h"
 
+class Obstacle;
+
 class Walker
 {
 public:
@@ -21,9 +23,12 @@ public:
 	virtual void edges();
 	void refreshLocation(const Vector2D& pos) { location = pos; }
 
+	Vector2D ObstacleAvoidance(const std::vector<Obstacle*>& obstacles);
+
 	Vector2D getLocation() const { return location; }
 	Vector2D getVelocity() const { return velocity; }
 	int getR() const { return r; }
+	float debugGetDBoxLength() const { return m_dDBoxLength; }
 
 protected:
 	Vector2D acceleration;
@@ -42,4 +47,7 @@ protected:
 	Vector2D m_vWanderPoint;
 	float m_fWanderRadius = 40;
 	float m_fWanderDistance = 100;
+
+	float m_dDBoxLength = 0;
+	float MinDetectionBoxLength = 50;
 };

@@ -13,6 +13,12 @@ public:
 		aacircleRGBA(renderer, position.getX(), position.getY(), radius, 255, 255, 255, 255);
 	}
 
+	Vector2D IntoLocalSpace(const Vector2D& vehiclePos, float vehicleHeading)
+	{
+		Vector2D localPos = (position - vehiclePos).RotateAngle(-vehicleHeading);
+		return localPos;
+	}
+
 	Vector2D position;
 	float radius;
 };

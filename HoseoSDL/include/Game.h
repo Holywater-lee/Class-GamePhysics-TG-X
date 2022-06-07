@@ -6,6 +6,8 @@
 
 #include <vector>
 
+#include <queue>
+
 class Walker;
 class Obstacle;
 class HidingAgent;
@@ -37,6 +39,12 @@ public:
 	void clean();
 	void quit() { m_bRunning = false; }
 
+	void InsertDrawQueue(float radius, Vector2D pos, bool isRed)
+	{
+		CircleToDraw circle_to_push(radius, pos, isRed);
+		circlesToDraw.push(circle_to_push);
+	}
+
 private:
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
@@ -48,6 +56,16 @@ private:
 
 	int numObstacles;
 	std::vector<Obstacle*> obstacles;
+
+	struct CircleToDraw
+	{
+		CircleToDraw(float _radius, Vector2D _pos, bool _isRed) : radius(_radius), pos(_pos), isRed(_isRed) {}
+		float radius;
+		Vector2D pos;
+		bool isRed;
+	};
+
+	std::queue<CircleToDraw> circlesToDraw;
 
 	Vector2D mousePos;
 };
